@@ -13,7 +13,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
   const { endedCalls, upcomingCalls, callRecordings, isLoading } =
     useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
-
+  
   const getCalls = () => {
     switch (type) {
       case 'ended':
@@ -61,12 +61,14 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
   if (isLoading) return <Loader />;
 
   const calls = getCalls();
+
   const noCallsMessage = getNoCallsMessage();
 
   return (
     <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
       {calls && calls.length > 0 ? (
         calls.map((meeting: Call | CallRecording) => (
+             
           <MeetingCard
             key={(meeting as Call).id}
             icon={
